@@ -28,13 +28,13 @@ const LoginPage = () => {
           value={email}
           onChangeText={setemail}
           style={styles.input}
-          placeholder={'Prénom'}
+          placeholder={'Email'}
           placeholderTextColor="grey"
         />
         <TextInput
           value={password}
           onChangeText={setPassword}
-          style={[styles.input, styles.errorInput]}
+          style={[styles.input]}
           placeholder={'Mot de passe'}
           secureTextEntry={true}
         />

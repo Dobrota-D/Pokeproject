@@ -43,9 +43,9 @@ const RegisterPage = () => {
 
     Alert.alert(
       'Bonjour ' +
-        email +
-        ' ' +
         pseudo +
+        ' votre email est ' +
+        email +
         ', votre mot de passe est ' +
         password,
     );
@@ -66,14 +66,14 @@ const RegisterPage = () => {
           value={email}
           onChangeText={setemail}
           style={styles.input}
-          placeholder={'Prénom'}
+          placeholder={'e-mail'}
           placeholderTextColor="grey"
         />
         <TextInput
           value={pseudo}
           onChangeText={setpseudo}
           style={styles.input}
-          placeholder={'Nom'}
+          placeholder={'pseudo'}
           placeholderTextColor="grey"
         />
         <TextInput
