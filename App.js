@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {React, useState, useEffect, useMemo, useCallback} from 'react';
+import { React, useState, useEffect, useMemo } from 'react';
 import {
   Text,
   StyleSheet,
@@ -7,13 +7,13 @@ import {
   View,
   Image,
   SafeAreaView,
-  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {getAllPokemons} from './src/components/helpers/apiHelper';
 
-import axios from 'axios';
+import { getAllPokemons } from './src/components/helpers/apiHelper';
 
+
+const bgImage = require('./src/assets/img/bgpokedex.jpg');
 const App = () => {
   const [list, setList] = useState([]);
 
@@ -30,28 +30,40 @@ const App = () => {
   }, [list]);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1}}>
-        <FlatList
-          data={displayList}
-          renderItem={({item}) => (
-            <>
-              <Text> {item.name} </Text>
-              <Image
-                style={{height: 100, width: 100}}
-                source={{
-                  uri: item.image,
-                }}
-              />
-            </>
-          )}
-        />
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <ImageBackground source={bgImage} style={styles.ImageBackground}>
+          <FlatList
+            data={displayList}
+            renderItem={({ item }) => (
+              <>
+                <Text> {item.name} </Text>
+                <Image
+                  style={{ height: 100, width: 100 }}
+                  source={{
+                    uri: item.image,
+                  }}
+                />
+              </>
+            )}
+          />
+        </ImageBackground>
       </View>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({});
-// Second Exercice
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  ImageBackground: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    opacity : 1
+  },
+
+});
 
 export default App;
