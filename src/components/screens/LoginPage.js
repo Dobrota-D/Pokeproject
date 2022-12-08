@@ -21,15 +21,11 @@ const LoginPage = () => {
     console.log(userTest);
     if (userTest.length > 0) {
       console.log('OK');
-    }
-  };
-
-  const onSubmit = useCallback(() => {
-    if (!email || !password) {
-      Alert.alert('Merci de compléter le formulaire');
+    } else if (!email || !password) {
+      Alert.alert('Merci de compléter la connexion');
       return;
     }
-  }, [email, password]);
+  };
 
   return (
     <SafeAreaView style={styles.screen}>
