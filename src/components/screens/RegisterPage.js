@@ -1,4 +1,5 @@
 import React, {useCallback, useState} from 'react';
+import {registerHelper, getRegister} from '../helpers/registerHelper';
 import {
   Text,
   TouchableOpacity,
@@ -28,7 +29,9 @@ const RegisterPage = () => {
     validateConfirmPassword();
   }, [password, validateConfirmPassword]);
 
-  const onSubmit = useCallback(() => {
+  getRegister();
+
+  const submit = () => {
     if (
       !email ||
       !pseudo ||
@@ -40,7 +43,11 @@ const RegisterPage = () => {
       Alert.alert('Merci de compléter le formulaire');
       return;
     }
-
+    registerHelper({
+      email: email,
+      pseudo: pseudo,
+      password: password,
+    });
     Alert.alert(
       'Bonjour ' +
         pseudo +
@@ -49,14 +56,7 @@ const RegisterPage = () => {
         ', votre mot de passe est ' +
         password,
     );
-  }, [
-    confirmPassword,
-    email,
-    isConfirmPasswordValid,
-    isPasswordValid,
-    pseudo,
-    password,
-  ]);
+  };
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -64,21 +64,21 @@ const RegisterPage = () => {
         <Text style={styles.titleText}>Inscription</Text>
         <TextInput
           value={email}
-          onChangeText={setemail}
+          onChangeText={em => setemail(em)}
           style={styles.input}
           placeholder={'e-mail'}
           placeholderTextColor="grey"
         />
         <TextInput
           value={pseudo}
-          onChangeText={setpseudo}
+          onChangeText={pseu => setpseudo(pseu)}
           style={styles.input}
           placeholder={'pseudo'}
           placeholderTextColor="grey"
         />
         <TextInput
           value={password}
-          onChangeText={setPassword}
+          onChangeText={pass => setPassword(pass)}
           style={[styles.input, !isPasswordValid && styles.errorInput]}
           placeholder={'Mot de passe'}
           secureTextEntry={true}
@@ -92,7 +92,7 @@ const RegisterPage = () => {
           secureTextEntry={true}
           onEndEditing={validateConfirmPassword}
         />
-        <TouchableOpacity style={styles.submitBtn} onPress={onSubmit}>
+        <TouchableOpacity style={styles.submitBtn} onPress={submit}>
           <Text>Inscription</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -113,14 +113,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'grey',
-    alignSelf: 'center',
-    marginBottom: 20,
   },
   input: {
     borderColor: 'grey',
