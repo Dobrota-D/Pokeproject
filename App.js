@@ -12,7 +12,6 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {getAllPokemons} from './src/components/helpers/apiHelper';
 
-import axios from 'axios';
 import AppNavigator from './src/components/navigators/AppNavigator';
 
 const App = () => {
@@ -38,6 +37,5 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({});
-// Second Exercice
 
 export default App;

@@ -9,10 +9,13 @@ import {
   Alert,
   StyleSheet,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const LoginPage = () => {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigation = useNavigation();
 
   const submit = () => {
     const userTest = Users.filter(
@@ -20,7 +23,7 @@ const LoginPage = () => {
     );
     console.log(userTest);
     if (userTest.length > 0) {
-      console.log('OK');
+      navigation.navigate('TabNav');
     } else if (!email || !password) {
       Alert.alert('Merci de compléter la connexion');
       return;
