@@ -1,4 +1,5 @@
 import React, {useCallback, useState} from 'react';
+import {Users} from '../model/user';
 import {
   Text,
   TouchableOpacity,
@@ -13,12 +14,18 @@ const LoginPage = () => {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmit = useCallback(() => {
-    if (!email || !password) {
-      Alert.alert('Merci de compléter le formulaire');
+  const submit = () => {
+    const userTest = Users.filter(
+      user => user.email === email && user.password === password,
+    );
+    console.log(userTest);
+    if (userTest.length > 0) {
+      console.log('OK');
+    } else if (!email || !password) {
+      Alert.alert('Merci de compléter la connexion');
       return;
     }
-  }, [email, password]);
+  };
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -26,19 +33,19 @@ const LoginPage = () => {
         <Text style={styles.titleText}>Connexion</Text>
         <TextInput
           value={email}
-          onChangeText={setemail}
+          onChangeText={em => setemail(em)}
           style={styles.input}
           placeholder={'Email'}
           placeholderTextColor="grey"
         />
         <TextInput
           value={password}
-          onChangeText={setPassword}
+          onChangeText={pass => setPassword(pass)}
           style={[styles.input]}
           placeholder={'Mot de passe'}
           secureTextEntry={true}
         />
-        <TouchableOpacity style={styles.submitBtn} onPress={onSubmit}>
+        <TouchableOpacity style={styles.submitBtn} onPress={submit}>
           <Text>Connexion</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -59,14 +66,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: 'grey',
-    alignSelf: 'center',
-    marginBottom: 20,
   },
   input: {
     borderColor: 'grey',

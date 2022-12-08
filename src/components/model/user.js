@@ -1,19 +1,26 @@
-export default Users = [
+export const Users = [
   {
     id: 1,
-    username: 'user1',
-    password: 'password',
+    email: 'Johanna',
+    pseudo: 'jojo',
+    password: 'pass',
   },
   {
     id: 2,
-    email: 'user2@email.com',
-    username: 'user2',
-    password: 'pass1234',
+    email: 'Kevin',
+    pseudo: 'keke',
+    password: 'pass',
   },
   {
     id: 3,
-    email: 'user3@email.com',
-    username: 'testuser',
-    password: 'testpass',
+    email: 'Leo',
+    pseudo: 'lele',
+    password: 'pass',
+  },
+  {
+    id: 4,
+    email: 'Mathieu',
+    pseudo: 'math',
+    password: 'pass',
   },
 ];
