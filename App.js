@@ -12,7 +12,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {getAllPokemons} from './src/components/helpers/apiHelper';
 
-import axios from 'axios';
+import AppNavigator from './src/components/navigators/AppNavigator';
 
 const App = () => {
   const [list, setList] = useState([]);
@@ -30,28 +30,12 @@ const App = () => {
   }, [list]);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1}}>
-        <FlatList
-          data={displayList}
-          renderItem={({item}) => (
-            <>
-              <Text> {item.name} </Text>
-              <Image
-                style={{height: 100, width: 100}}
-                source={{
-                  uri: item.image,
-                }}
-              />
-            </>
-          )}
-        />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
   );
 };
 
 const styles = StyleSheet.create({});
-// Second Exercice
 
 export default App;
