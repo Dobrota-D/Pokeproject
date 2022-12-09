@@ -14,8 +14,11 @@ import {
 } from 'react-native';
 import {getUniquePokemon} from '../helpers/apiHelper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
 
 const FavPokemonItem = props => {
+  const navigation = useNavigation();
+
   const {styles} = props;
   const {item} = props;
   const {deleteMe} = props;
@@ -117,24 +120,27 @@ const FavPokemonItem = props => {
   }, [item]);
 
   return (
-    <View style={[styles.item, {backgroundColor: color}]}>
-      <View style={styles.headerPokemonCard}>
-        <Image style={styles.imageItem} source={{uri: pokemon.image}} />
-        <View style={styles.rightHeaderPokemonCard}>
-          <Text style={styles.itemText}>{pokemon.name}</Text>
-          <Text style={styles.itemNumberText}>
-            Pokemon n°{pokemon.pokedexId}
-          </Text>
-          <View style={styles.typeContainer}>
-            <Text> Type{pokemon.apiTypes.length > 1 ? 's' : ''}: </Text>
-            <Test pokemon={pokemon} />
+    <TouchableOpacity
+      onPress={() => navigation.navigate('PokemonPage', {item: pokemon})}>
+      <View style={[styles.item, {backgroundColor: color}]}>
+        <View style={styles.headerPokemonCard}>
+          <Image style={styles.imageItem} source={{uri: pokemon.image}} />
+          <View style={styles.rightHeaderPokemonCard}>
+            <Text style={styles.itemText}>{pokemon.name}</Text>
+            <Text style={styles.itemNumberText}>
+              Pokemon n°{pokemon.pokedexId}
+            </Text>
+            <View style={styles.typeContainer}>
+              <Text> Type{pokemon.apiTypes.length > 1 ? 's' : ''}: </Text>
+              <Test pokemon={pokemon} />
+            </View>
           </View>
+          <TouchableOpacity style={styles.deleteBtn} onPress={deleteMe}>
+            <Ionicons size={25} name="close-outline"></Ionicons>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.deleteBtn} onPress={deleteMe}>
-          <Ionicons size={25} name="close-outline"></Ionicons>
-        </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

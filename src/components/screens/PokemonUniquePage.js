@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import {getUniquePokemon} from '../helpers/apiHelper';
 
-const PokemonUniquePage = () => {
+const PokemonUniquePage = ({route, navigation}) => {
   const listeTab = [
     {
       status: 'Stats',
@@ -30,62 +30,7 @@ const PokemonUniquePage = () => {
   const setStatusFilter = status => {
     setStatus(status);
   };
-
-  const item = {
-    apiEvolutions: [],
-    apiGeneration: 1,
-    apiPreEvolution: {name: 'Piafabec', pokedexIdd: 21},
-    apiResistances: [
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Normal'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Combat'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Vol'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Poison'},
-      {damage_multiplier: 0, damage_relation: 'immune', name: 'Sol'},
-      {damage_multiplier: 2, damage_relation: 'vulnerable', name: 'Roche'},
-      {damage_multiplier: 0.5, damage_relation: 'resistant', name: 'Insecte'},
-      {damage_multiplier: 0, damage_relation: 'immune', name: 'Spectre'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Acier'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Feu'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Eau'},
-      {damage_multiplier: 0.5, damage_relation: 'resistant', name: 'Plante'},
-      {damage_multiplier: 2, damage_relation: 'vulnerable', name: 'Électrik'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Psy'},
-      {damage_multiplier: 2, damage_relation: 'vulnerable', name: 'Glace'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Dragon'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Ténèbres'},
-      {damage_multiplier: 1, damage_relation: 'neutral', name: 'Fée'},
-    ],
-    apiResistancesWithAbilities: [],
-    apiTypes: [
-      {
-        image:
-          'https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png',
-        name: 'Normal',
-      },
-      {
-        image:
-          'https://static.wikia.nocookie.net/pokemongo/images/7/7f/Flying.png',
-        name: 'Vol',
-      },
-    ],
-    id: 22,
-    image:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/22.png',
-    name: 'Rapasdepic',
-    pokedexId: 22,
-    resistanceModifyingAbilitiesForApi: [],
-    slug: 'Rapasdepic',
-    sprite:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png',
-    stats: {
-      HP: 65,
-      attack: 90,
-      defense: 65,
-      special_attack: 61,
-      special_defense: 61,
-      speed: 100,
-    },
-  };
+  const {item} = route.params;
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
