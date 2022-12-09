@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const getActualUser = async () => {
-  let json = await AsyncStorage.getItem('userConnectedId');
-  return json;
+  let userId = await AsyncStorage.getItem('userConnectedId');
+  return userId;
 };
 
 export const setActualUser = async id => {
@@ -32,30 +32,14 @@ export const deleteUser = async id => {
   await AsyncStorage.setItem('users', json);
 };
 
-export const getFavoritesOfUser = async id => {
-  let favorites = await getFavorites();
-  favorites = favorites.filter(favorite => {
-    if (favorite.userId === parseInt(id, 10)) {
-      return favorite;
-    }
-  });
-  return favorites;
-};
-
-export const getFavorites = async () => {
-  let json = await AsyncStorage.getItem('favorites');
-  let favorites = JSON.parse(json);
+export const getFavorites = async id => {
+  let json = await AsyncStorage.getItem(`favorites_${id}`);
+  let favorites = await JSON.parse(json);
   return favorites;
 };
 
 export const saveFavorites = async (id, favorites) => {
-  const data = await getFavorites();
   // favorites = [54, 65, 78, 64, 7, 67, 34, 22];
-  data.forEach(favorite => {
-    if (favorite.userId === parseInt(id, 10)) {
-      favorite.favorites = favorites;
-    }
-  });
-  const json = JSON.stringify(data);
-  // await AsyncStorage.setItem('favorites', json);
+  const json = JSON.stringify(favorites);
+  await AsyncStorage.setItem(`favorites_${id}`, json);
 };

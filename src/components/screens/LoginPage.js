@@ -28,7 +28,6 @@ const LoginPage = () => {
     console.log(userTest);
     if (userTest.length > 0) {
       navigation.navigate('TabNav');
-      navigation.navigate('RegisterPage');
     } else if (!email || !password) {
       Alert.alert('Merci de compléter la connexion');
       return;
