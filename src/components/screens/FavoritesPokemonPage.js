@@ -14,7 +14,6 @@ import {
   FlatList,
   ImageBackground,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 import {
   getActualUser,
   getFavorites,
