@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {React, useState, useEffect, useMemo} from 'react';
 import {
+  TextInput,
   Text,
   StyleSheet,
   FlatList,
@@ -16,6 +17,7 @@ import PokedexTile from './PokedexTile';
 const background = require('../../assets/img/bgdex.jpg');
 const PokedexList = () => {
   const [list, setList] = useState([]);
+  const [search, setSearch] = useState('');
 
   const getPokemons = async () => {
     setList(await getAllPokemons());
@@ -26,13 +28,19 @@ const PokedexList = () => {
   }, []);
 
   const displayList = useMemo(() => {
-    return list;
-  }, [list]);
+    return list.filter(element => element.name.includes(search));
+  }, [list, search]);
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
         <ImageBackground source={background} style={styles.ImageBackground}>
+          <TextInput
+            style={styles.input}
+            placeholder="Recherche..."
+            onChangeText={newSearch => setSearch(newSearch)}
+            defaultValue={search}
+          />
           <FlatList
             style={styles.list}
             data={displayList}
@@ -77,6 +85,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 10,
     padding: 10,
+  },
+  input: {
+    color: 'white',
+    width: '80%',
+    height: 40,
+    paddingBottom: 6,
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
   },
 });
 
