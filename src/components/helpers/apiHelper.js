@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getAllPokemons = async () => {
   let data;
-  await axios.get('https://pokebuildapi.fr/api/v1/pokemon').then(response => {
+  await axios.get('https://pokebuildapi.fr/api/v1/pokemon/limit/1').then(response => {
     data = response.data;
   });
   return data;

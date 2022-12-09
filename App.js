@@ -10,8 +10,7 @@ import {
   ImageBackground,
 } from 'react-native';
 
-import { getAllPokemons } from './src/components/helpers/apiHelper';
-import PokedexList from "./src/components/screens/PokedexList";
+import AppNavigator from './src/components/navigators/AppNavigator';
 
 
 const bgImage = require('./src/assets/img/bgdex.jpg');
@@ -31,12 +30,13 @@ const App = () => {
   }, [list]);
 
   return (
-      <PokedexList>
-
-      </PokedexList>
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
   );
 };
 
+const styles = StyleSheet.create({});
 
 
 
