@@ -27,15 +27,15 @@ const PokedexTile = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: windowWidth / 2 - 10,
-        height: windowWidth / 2 - 10,
+        width: windowWidth / 3 - 10,
+        height: windowWidth / 3 - 10,
         alignItems: 'center',
         justifyContent: 'center',
         margin: 5,
     },
     pkmimg: {
-        height: 75,
-        width: 75,
+        height: 100,
+        width: 100,
     },
     pkmbg: {
         height: 75,

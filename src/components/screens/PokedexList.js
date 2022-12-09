@@ -33,7 +33,7 @@ const PokedexList = () => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
+            <View style={styles.container}>
                 <ImageBackground source={background} style={styles.ImageBackground}>
                     <FlatList style={styles.list}
                         data={displayList}
@@ -52,11 +52,16 @@ const PokedexList = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
     },
     ImageBackground: {
         flex: 1,
         resizeMode: 'cover',
-        justifyContent: 'center',
+        width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
         opacity : 1
     },
     card: {
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         margin: 10,
         padding: 10,
-        
+
     },
 
 });
