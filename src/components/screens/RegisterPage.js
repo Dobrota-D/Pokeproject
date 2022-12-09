@@ -76,7 +76,6 @@ const RegisterPage = () => {
     );
     navigation.navigate('TabNav');
   };
-
   return (
     <SafeAreaView style={styles.screen}>
       <ScrollView style={styles.container}>
@@ -128,7 +127,6 @@ const RegisterPage = () => {
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   viewstyle: {
     paddingTop: 50,
