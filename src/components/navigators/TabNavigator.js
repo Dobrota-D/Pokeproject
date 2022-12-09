@@ -2,6 +2,7 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FavoritePage from '../screens/FavoritesPokemonPage';
+import AboutUsPage from '../screens/AboutUsPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +33,15 @@ const TabNavigator = () => {
         options={{
           tabBarIcon: ({color}) => (
             <Ionicons name="star-outline" color={color} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="À propos"
+        component={AboutUsPage}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Ionicons name="alert-circle-outline" color={color} size={24} />
           ),
         }}
       />
