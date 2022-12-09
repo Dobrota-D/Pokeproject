@@ -1,5 +1,13 @@
+// import des paquets
 import React, {useCallback, useState} from 'react';
+<<<<<<< Updated upstream
 import {registerHelper, getRegister} from '../helpers/registerHelper';
+=======
+<<<<<<< Updated upstream
+=======
+import {useNavigation} from '@react-navigation/native';
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 import {
   Text,
   TouchableOpacity,
@@ -10,6 +18,10 @@ import {
   StyleSheet,
 } from 'react-native';
 
+//import des fonction Asynchelper
+// import {registerHelper, getRegister} from '../helpers/registerHelper';
+import {addUser, getUsers} from '../helpers/asyncStorageHelper';
+
 const RegisterPage = () => {
   const [email, setemail] = useState('');
   const [pseudo, setpseudo] = useState('');
@@ -18,6 +30,8 @@ const RegisterPage = () => {
 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
+
+  const navigation = useNavigation();
 
   const validateConfirmPassword = useCallback(() => {
     setIsConfirmPasswordValid(password === confirmPassword);
@@ -29,9 +43,19 @@ const RegisterPage = () => {
     validateConfirmPassword();
   }, [password, validateConfirmPassword]);
 
+<<<<<<< Updated upstream
   getRegister();
 
   const submit = () => {
+=======
+<<<<<<< Updated upstream
+  const onSubmit = useCallback(() => {
+=======
+  getUsers();
+
+  const submit = () => {
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     if (
       !email ||
       !pseudo ||
@@ -43,11 +67,22 @@ const RegisterPage = () => {
       Alert.alert('Merci de compléter le formulaire');
       return;
     }
+<<<<<<< Updated upstream
     registerHelper({
+=======
+<<<<<<< Updated upstream
+
+=======
+    addUser({
+>>>>>>> Stashed changes
       email: email,
       pseudo: pseudo,
       password: password,
     });
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     Alert.alert(
       'Bonjour ' +
         pseudo +
@@ -94,6 +129,11 @@ const RegisterPage = () => {
         />
         <TouchableOpacity style={styles.submitBtn} onPress={submit}>
           <Text>Inscription</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.submitBtn}
+          onPress={() => navigation.navigate('LoginPage')}>
+          <Text>Retour connexion</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
