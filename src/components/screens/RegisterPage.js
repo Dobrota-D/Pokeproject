@@ -1,5 +1,5 @@
 // import des paquets
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   Text,
@@ -13,13 +13,15 @@ import {
 
 //import des fonction Asynchelper
 // import {registerHelper, getRegister} from '../helpers/registerHelper';
-import {addUser, getUsers} from '../helpers/asyncStorageHelper';
+import {addUser, getUsers, setActualUser} from '../helpers/asyncStorageHelper';
 
 const RegisterPage = () => {
   const [email, setemail] = useState('');
   const [pseudo, setpseudo] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [users, setUsers] = useState([]);
 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
@@ -36,9 +38,15 @@ const RegisterPage = () => {
     validateConfirmPassword();
   }, [password, validateConfirmPassword]);
 
-  getUsers();
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
-  const submit = () => {
+  const loadUsers = async () => {
+    setUsers(await getUsers());
+  };
+
+  const submit = async () => {
     if (
       !email ||
       !pseudo ||
@@ -50,11 +58,14 @@ const RegisterPage = () => {
       Alert.alert('Merci de compléter le formulaire');
       return;
     }
-    addUser({
+    let id = Math.random();
+    await addUser({
+      id: id,
       email: email,
       pseudo: pseudo,
       password: password,
     });
+    await setActualUser(id);
     Alert.alert(
       'Bonjour ' +
         pseudo +
@@ -63,6 +74,7 @@ const RegisterPage = () => {
         ', votre mot de passe est ' +
         password,
     );
+    navigation.navigate('TabNav');
   };
 
   return (

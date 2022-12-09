@@ -1,5 +1,5 @@
 // import des paquets
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
   Text,
@@ -12,27 +12,42 @@ import {
 } from 'react-native';
 
 //import fonction AsyncStorage
-import {Users} from '../model/user';
+import {getUsers, setActualUser} from '../helpers/asyncStorageHelper';
 
 const LoginPage = () => {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  const loadUsers = async () => {
+    setUsers(await getUsers());
+  };
 
   //submit du bouton connexion
-  const submit = () => {
-    const userTest = Users.filter(
-      user => user.email === email && user.password === password,
-    );
-    console.log(userTest);
-    if (userTest.length > 0) {
-      navigation.navigate('TabNav');
-      navigation.navigate('RegisterPage');
-    } else if (!email || !password) {
+  const submit = async () => {
+    if (!email || !password) {
       Alert.alert('Merci de compléter la connexion');
       return;
     }
+    const user = await getUsers();
+    //console.log(user);
+    const filt = user.filter(
+      el => el.email === email && el.password === password,
+    );
+
+    if (filt.length > 0) {
+      navigation.navigate('TabNav');
+    } else {
+      Alert.alert('LOGIN ERROR');
+    }
+
+    console.log(filt);
   };
 
   return (
