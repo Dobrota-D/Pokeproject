@@ -43,6 +43,7 @@ const PokedexList = () => {
           />
           <FlatList
             style={styles.list}
+            numColumns={3}
             data={displayList}
             renderItem={({item}) => (
               <>
