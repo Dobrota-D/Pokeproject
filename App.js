@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {React, useState, useEffect, useMemo, useCallback} from 'react';
+import { React, useState, useEffect, useMemo } from 'react';
 import {
   Text,
   StyleSheet,
@@ -7,13 +7,13 @@ import {
   View,
   Image,
   SafeAreaView,
-  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {getAllPokemons} from './src/components/helpers/apiHelper';
 
 import AppNavigator from './src/components/navigators/AppNavigator';
 
+
+const bgImage = require('./src/assets/img/bgdex.jpg');
 const App = () => {
   const [list, setList] = useState([]);
 
@@ -37,5 +37,7 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({});
+
+
 
 export default App;
