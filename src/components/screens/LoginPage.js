@@ -1,5 +1,5 @@
 // import des paquets
-import React, {useCallback, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Image} from 'react-native';
 import {
@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 //import fonction AsyncStorage
-import {getUsers, setActualUser} from '../helpers/asyncStorageHelper';
+import {getUsers} from '../helpers/asyncStorageHelper';
 
 const LoginPage = () => {
   const [email, setemail] = useState('');
@@ -30,9 +30,6 @@ const LoginPage = () => {
   const loadUsers = async () => {
     setUsers(await getUsers());
   };
-
-  const imageUrl =
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/387.png';
 
   //submit du bouton connexion
   const submit = async () => {
@@ -57,6 +54,13 @@ const LoginPage = () => {
 
   return (
     <SafeAreaView style={styles.screen}>
+      <Image
+        style={styles.img}
+        source={{
+          uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png',
+        }}
+      />
+      <Text style={styles.title2Text}>PokéFactory</Text>
       <ScrollView style={styles.container}>
         <View style={styles.viewstyle}>
           <Text style={styles.titleText}>Connexion</Text>
@@ -100,9 +104,9 @@ const LoginPage = () => {
 
 const styles = StyleSheet.create({
   viewstyle: {
-    paddingTop: 50,
+    paddingTop: 20,
     paddingHorizontal: 20,
-    marginVertical: 210,
+    marginVertical: 10,
   },
   screen: {
     flex: 1,
@@ -111,13 +115,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  Logo: {
-    width: 50,
-    height: 50,
+  img: {
+    marginVertical: 10,
+    width: 190,
+    height: 190,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title2Text: {
+    color: 'black',
+    fontSize: 38,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   titleText: {
     color: 'black',
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: 'bold',
   },
   corText: {

@@ -12,48 +12,58 @@ import {
   Platform,
   ScrollView,
   FlatList,
+  ImageBackground,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
   getActualUser,
-  getFavoritesOfUser,
+  getFavorites,
   saveFavorites,
 } from '../helpers/asyncStorageHelper';
 import FavPokemonItem from '../items/favPokemonCard';
+
+const backgroundImage = require('../../assets/img/backgroundFavPage.jpg');
 
 const FavoritePage = () => {
   const [favorites, setFavorites] = useState([]);
   const [actualUserId, setActualUserId] = useState(0);
 
-  const loadFavorites = useCallback(async () => {
-    setActualUserId(await getActualUser());
-    const favoritesStorage = await getFavoritesOfUser(actualUserId);
-    setFavorites(favoritesStorage[0].favorites);
-  }, [actualUserId, setActualUserId, setFavorites]);
+  const loadFavorites = async () => {
+    const userIdStorage = await getActualUser();
+    setActualUserId(userIdStorage);
+    const favoritesStorage = await getFavorites(userIdStorage);
+    setFavorites(favoritesStorage);
+  };
 
   useEffect(() => {
     loadFavorites();
-  }, [loadFavorites]);
+  }, []);
 
   useEffect(() => {
     saveFavorites(actualUserId, favorites);
-  }, [favorites, actualUserId]);
+  }, [favorites]);
+
+  if (!favorites) {
+    return null;
+  }
 
   return (
     <SafeAreaView style={styles.screen}>
+      <ImageBackground source={backgroundImage} resizeMode={'cover'} />
       <View style={styles.container}>
         <Text style={styles.titlePage}> Favoris </Text>
         <FlatList
           scrollEnabled={true}
           style={styles.list}
           data={favorites}
-          renderItem={({item}) => (
+          renderItem={({item, index}) => (
             <FavPokemonItem
+              key={index}
               styles={styles}
               item={item}
-              deleteMe={() => {
-                setFavorites(favorites.filter(element => element !== item));
-              }}
+              deleteMe={() =>
+                setFavorites(favorites.filter(element => element !== item))
+              }
             />
           )}
         />
@@ -64,7 +74,6 @@ const FavoritePage = () => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#B0AFAF',
   },
   container: {
     flex: 1,
@@ -83,7 +92,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: 'white',
   },
   deleteBtn: {
     width: 40,
