@@ -26,7 +26,7 @@ const PokemonUniquePage = ({route, navigation}) => {
       status: 'Resistances',
     },
   ];
-  const [status, setStatus] = useState('Overview');
+  const [status, setStatus] = useState('Stats');
   const setStatusFilter = status => {
     setStatus(status);
   };
