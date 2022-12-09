@@ -117,6 +117,7 @@ const FavPokemonItem = props => {
 
   useEffect(() => {
     loadPokemon();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item]);
 
   return (
@@ -132,7 +133,7 @@ const FavPokemonItem = props => {
             </Text>
             <View style={styles.typeContainer}>
               <Text> Type{pokemon.apiTypes.length > 1 ? 's' : ''}: </Text>
-              <Test pokemon={pokemon} />
+              <TypePokemon pokemon={pokemon} />
             </View>
           </View>
           <TouchableOpacity style={styles.deleteBtn} onPress={deleteMe}>
@@ -146,7 +147,7 @@ const FavPokemonItem = props => {
 
 export default FavPokemonItem;
 
-const Test = ({pokemon}) => {
+const TypePokemon = ({pokemon}) => {
   return pokemon.apiTypes.map((type, index) => (
     <Image style={{width: 20, height: 20}} source={{uri: type.image}} />
   ));

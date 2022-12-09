@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getAllPokemons = async () => {
   let data;
-  await axios.get('https://pokebuildapi.fr/api/v1/pokemon/limit/1').then(response => {
+  await axios.get('https://pokebuildapi.fr/api/v1/pokemon').then(response => {
     data = response.data;
   });
   return data;
@@ -10,12 +10,11 @@ export const getAllPokemons = async () => {
 
 export const getUniquePokemon = async id => {
   let data;
-  await axios
-    .get(`https://pokebuildapi.fr/api/v1/pokemon/${id}`)
-    .then(response => {
-      data = response.data;
-    });
-  return data;
+  const response = await axios.get(
+    `https://pokebuildapi.fr/api/v1/pokemon/${id}`,
+  );
+
+  return response.data;
 };
 
 export const getPokemonByType = async type => {
