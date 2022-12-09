@@ -9,10 +9,10 @@ import {
   SafeAreaView,
   Alert,
   StyleSheet,
+  View,
 } from 'react-native';
 
 //import des fonction Asynchelper
-// import {registerHelper, getRegister} from '../helpers/registerHelper';
 import {addUser, getUsers, setActualUser} from '../helpers/asyncStorageHelper';
 
 const RegisterPage = () => {
@@ -80,87 +80,110 @@ const RegisterPage = () => {
   return (
     <SafeAreaView style={styles.screen}>
       <ScrollView style={styles.container}>
-        <Text style={styles.titleText}>Inscription</Text>
-        <TextInput
-          value={email}
-          onChangeText={em => setemail(em)}
-          style={styles.input}
-          placeholder={'e-mail'}
-          placeholderTextColor="grey"
-        />
-        <TextInput
-          value={pseudo}
-          onChangeText={pseu => setpseudo(pseu)}
-          style={styles.input}
-          placeholder={'pseudo'}
-          placeholderTextColor="grey"
-        />
-        <TextInput
-          value={password}
-          onChangeText={pass => setPassword(pass)}
-          style={[styles.input, !isPasswordValid && styles.errorInput]}
-          placeholder={'Mot de passe'}
-          secureTextEntry={true}
-          onEndEditing={validatePassword}
-        />
-        <TextInput
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          style={[styles.input, !isConfirmPasswordValid && styles.errorInput]}
-          placeholder={'Confirmation du mot de passe'}
-          secureTextEntry={true}
-          onEndEditing={validateConfirmPassword}
-        />
-        <TouchableOpacity style={styles.submitBtn} onPress={submit}>
-          <Text>Inscription</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.submitBtn}
-          onPress={() => navigation.navigate('LoginPage')}>
-          <Text>Retour connexion</Text>
-        </TouchableOpacity>
+        <View style={styles.viewstyle}>
+          <Text style={styles.titleText}>Inscription</Text>
+          <Text style={styles.corText}>
+            Entrez vos informations pour vous connecter
+          </Text>
+          <TextInput
+            value={email}
+            onChangeText={em => setemail(em)}
+            style={styles.input}
+            placeholder={'Entrer votre adresse mail'}
+            placeholderTextColor="grey"
+          />
+          <TextInput
+            value={pseudo}
+            onChangeText={pseu => setpseudo(pseu)}
+            style={styles.input}
+            placeholder={'Entrer votre pseudo'}
+            placeholderTextColor="grey"
+          />
+          <TextInput
+            value={password}
+            onChangeText={pass => setPassword(pass)}
+            style={[styles.input, !isPasswordValid && styles.errorInput]}
+            placeholder={'Entrer votre Mot de passe'}
+            secureTextEntry={true}
+            onEndEditing={validatePassword}
+          />
+          <TextInput
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            style={[styles.input, !isConfirmPasswordValid && styles.errorInput]}
+            placeholder={'Confirmer votre mot de passe'}
+            secureTextEntry={true}
+            onEndEditing={validateConfirmPassword}
+          />
+          <TouchableOpacity style={styles.submitBtn} onPress={submit}>
+            <Text>Inscription</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.submitBtsignin}
+            onPress={() => navigation.navigate('LoginPage')}>
+            <Text style={{color: 'blue'}}>Retour connexion</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  viewstyle: {
+    paddingTop: 50,
+    paddingHorizontal: 20,
+  },
   screen: {
     flex: 1,
+    backgroundColor: 'white',
   },
   container: {
     flex: 1,
   },
   titleText: {
-    textAlign: 'center',
-    marginVertical: 20,
-    fontSize: 25,
-    fontWeight: 'bold',
     color: 'black',
+    fontSize: 40,
+    fontWeight: 'bold',
+  },
+  corText: {
+    color: 'grey',
+    fontSize: 18,
+    marginVertical: 10,
   },
   input: {
     borderColor: 'grey',
     backgroundColor: '#b8b8b8',
     borderWidth: 1,
-    borderRadius: 5,
-    marginHorizontal: 15,
-    marginVertical: 15,
+    borderRadius: 10,
+    marginHorizontal: 5,
+    marginVertical: 20,
     paddingHorizontal: 10,
     height: 50,
+    fontWeight: 'bold',
+    fontSize: 13,
   },
   errorInput: {
     borderColor: 'red',
   },
   submitBtn: {
-    width: 200,
-    height: 50,
+    width: 250,
+    height: 40,
     borderColor: 'grey',
     borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 10,
     marginVertical: 20,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  submitBtsignin: {
+    alignContent: 'space-around',
+    height: 40,
+    marginVertical: 20,
+    alignSelf: 'center',
+
+    placeholderTextColor: 'green',
   },
 });
 
