@@ -57,7 +57,7 @@ const LoginPage = () => {
       <Image
         style={styles.img}
         source={{
-          uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/387.png',
+          uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png',
         }}
       />
       <Text style={styles.title2Text}>PokéFactory</Text>
