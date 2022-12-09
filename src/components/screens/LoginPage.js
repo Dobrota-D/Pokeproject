@@ -1,5 +1,6 @@
+// import des paquets
 import React, {useCallback, useState} from 'react';
-import {Users} from '../model/user';
+import {useNavigation} from '@react-navigation/native';
 import {
   Text,
   TouchableOpacity,
@@ -9,7 +10,9 @@ import {
   Alert,
   StyleSheet,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+
+//import fonction AsyncStorage
+import {Users} from '../model/user';
 
 const LoginPage = () => {
   const [email, setemail] = useState('');
@@ -17,6 +20,7 @@ const LoginPage = () => {
 
   const navigation = useNavigation();
 
+  //submit du bouton connexion
   const submit = () => {
     const userTest = Users.filter(
       user => user.email === email && user.password === password,
@@ -24,6 +28,7 @@ const LoginPage = () => {
     console.log(userTest);
     if (userTest.length > 0) {
       navigation.navigate('TabNav');
+      navigation.navigate('RegisterPage');
     } else if (!email || !password) {
       Alert.alert('Merci de compléter la connexion');
       return;
@@ -50,6 +55,11 @@ const LoginPage = () => {
         />
         <TouchableOpacity style={styles.submitBtn} onPress={submit}>
           <Text>Connexion</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.submitBtn}
+          onPress={() => navigation.navigate('RegisterPage')}>
+          <Text>Inscription</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

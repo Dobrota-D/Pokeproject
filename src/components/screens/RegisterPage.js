@@ -1,5 +1,6 @@
+// import des paquets
 import React, {useCallback, useState} from 'react';
-import {registerHelper, getRegister} from '../helpers/registerHelper';
+import {useNavigation} from '@react-navigation/native';
 import {
   Text,
   TouchableOpacity,
@@ -10,6 +11,10 @@ import {
   StyleSheet,
 } from 'react-native';
 
+//import des fonction Asynchelper
+// import {registerHelper, getRegister} from '../helpers/registerHelper';
+import {addUser, getUsers} from '../helpers/asyncStorageHelper';
+
 const RegisterPage = () => {
   const [email, setemail] = useState('');
   const [pseudo, setpseudo] = useState('');
@@ -18,6 +23,8 @@ const RegisterPage = () => {
 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
+
+  const navigation = useNavigation();
 
   const validateConfirmPassword = useCallback(() => {
     setIsConfirmPasswordValid(password === confirmPassword);
@@ -29,7 +36,7 @@ const RegisterPage = () => {
     validateConfirmPassword();
   }, [password, validateConfirmPassword]);
 
-  getRegister();
+  getUsers();
 
   const submit = () => {
     if (
@@ -43,7 +50,7 @@ const RegisterPage = () => {
       Alert.alert('Merci de compléter le formulaire');
       return;
     }
-    registerHelper({
+    addUser({
       email: email,
       pseudo: pseudo,
       password: password,
@@ -94,6 +101,11 @@ const RegisterPage = () => {
         />
         <TouchableOpacity style={styles.submitBtn} onPress={submit}>
           <Text>Inscription</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.submitBtn}
+          onPress={() => navigation.navigate('LoginPage')}>
+          <Text>Retour connexion</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
