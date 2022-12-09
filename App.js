@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 
 import AppNavigator from './src/components/navigators/AppNavigator';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from "@react-navigation/native";
+import { getAllPokemons } from "./src/components/helpers/apiHelper";
 
 const bgImage = require('./src/assets/img/bgdex.jpg');
 const App = () => {
