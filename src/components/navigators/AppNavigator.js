@@ -5,17 +5,18 @@ const Stack = createNativeStackNavigator();
 
 import LoginPage from '../screens/LoginPage';
 import RegisterPage from '../screens/RegisterPage';
-import FavoritePage from '../screens/FavoritesPokemonPage';
 import TabNavigator from './TabNavigator';
+import PokemonUniquePage from "../screens/PokemonUniquePage";
 
 const AppNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="LoginPage">
+      initialRouteName="PokemonPage">
       <Stack.Screen name="TabNav" component={TabNavigator} />
       <Stack.Screen name="LoginPage" component={LoginPage} />
       <Stack.Screen name="RegisterPage" component={RegisterPage} />
+      <Stack.Screen name="PokemonPage" component={PokemonUniquePage} />
     </Stack.Navigator>
   );
 };
