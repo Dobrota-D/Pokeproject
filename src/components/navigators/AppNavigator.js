@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator();
 import LoginPage from '../screens/LoginPage';
 import RegisterPage from '../screens/RegisterPage';
 import TabNavigator from './TabNavigator';
-import PokemonUniquePage from "../screens/PokemonUniquePage";
+import PokemonUniquePage from '../screens/PokemonUniquePage';
 import AboutUsPage from '../screens/AboutUsPage';
 
 const AppNavigator = () => {
