@@ -1,13 +1,6 @@
 // import des paquets
 import React, {useCallback, useState} from 'react';
-<<<<<<< Updated upstream
-import {registerHelper, getRegister} from '../helpers/registerHelper';
-=======
-<<<<<<< Updated upstream
-=======
 import {useNavigation} from '@react-navigation/native';
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 import {
   Text,
   TouchableOpacity,
@@ -43,19 +36,9 @@ const RegisterPage = () => {
     validateConfirmPassword();
   }, [password, validateConfirmPassword]);
 
-<<<<<<< Updated upstream
-  getRegister();
-
-  const submit = () => {
-=======
-<<<<<<< Updated upstream
-  const onSubmit = useCallback(() => {
-=======
   getUsers();
 
   const submit = () => {
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     if (
       !email ||
       !pseudo ||
@@ -67,22 +50,11 @@ const RegisterPage = () => {
       Alert.alert('Merci de compléter le formulaire');
       return;
     }
-<<<<<<< Updated upstream
-    registerHelper({
-=======
-<<<<<<< Updated upstream
-
-=======
     addUser({
->>>>>>> Stashed changes
       email: email,
       pseudo: pseudo,
       password: password,
     });
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     Alert.alert(
       'Bonjour ' +
         pseudo +
