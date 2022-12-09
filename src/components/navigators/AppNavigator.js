@@ -5,8 +5,8 @@ const Stack = createNativeStackNavigator();
 
 import LoginPage from '../screens/LoginPage';
 import RegisterPage from '../screens/RegisterPage';
-import FavoritePage from '../screens/FavoritesPokemonPage';
 import TabNavigator from './TabNavigator';
+import AboutUsPage from '../screens/AboutUsPage';
 
 const AppNavigator = () => {
   return (
@@ -16,6 +16,7 @@ const AppNavigator = () => {
       <Stack.Screen name="TabNav" component={TabNavigator} />
       <Stack.Screen name="LoginPage" component={LoginPage} />
       <Stack.Screen name="RegisterPage" component={RegisterPage} />
+      <Stack.Screen name="AboutUsPage" component={AboutUsPage} />
     </Stack.Navigator>
   );
 };
