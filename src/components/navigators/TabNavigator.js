@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FavoritePage from '../screens/FavoritesPokemonPage';
 import AboutUsPage from '../screens/AboutUsPage';
+import PokedexList from '../screens/PokedexList';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,6 +28,15 @@ const TabNavigator = () => {
         headerShown: false,
       })}
       initialRouteName="TodosList">
+      <Tab.Screen
+        name="Pokedex"
+        component={PokedexList}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Ionicons name="home" color={color} size={24} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Favoris"
         component={FavoritePage}
