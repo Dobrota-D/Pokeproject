@@ -20,10 +20,12 @@ import {
   saveFavorites,
 } from '../helpers/asyncStorageHelper';
 import FavPokemonItem from '../items/favPokemonCard';
+import {useIsFocused} from '@react-navigation/native';
 
 const backgroundImage = require('../../assets/img/backgroundFavPage.jpg');
 
 const FavoritePage = () => {
+  const isFocused = useIsFocused();
   const [favorites, setFavorites] = useState([]);
   const [actualUserId, setActualUserId] = useState(0);
 
@@ -36,7 +38,7 @@ const FavoritePage = () => {
 
   useEffect(() => {
     loadFavorites();
-  }, []);
+  }, [isFocused]);
 
   useEffect(() => {
     saveFavorites(actualUserId, favorites);

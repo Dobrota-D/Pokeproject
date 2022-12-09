@@ -12,9 +12,40 @@ import {
   Dimensions,
   Pressable,
 } from 'react-native';
-import {getUniquePokemon} from '../helpers/apiHelper';
+import {
+  getFavorites,
+  getActualUser,
+  saveFavorites,
+} from '../helpers/asyncStorageHelper';
 
 const PokemonUniquePage = ({route, navigation}) => {
+  const [favorites, setFavorites] = useState([]);
+  const [actualUserId, setActualUserId] = useState(0);
+
+  const loadFavorites = async () => {
+    const userIdStorage = await getActualUser();
+    setActualUserId(userIdStorage);
+    const favoritesStorage = await getFavorites(userIdStorage);
+    console.log(favoritesStorage);
+    setFavorites(favoritesStorage);
+  };
+
+  useEffect(() => {
+    loadFavorites();
+  }, []);
+
+  useEffect(() => {
+    saveFavorites(actualUserId, favorites);
+  }, [favorites]);
+
+  const checkFavorite = async id => {
+    if (favorites.includes(id)) {
+      setFavorites(favorites.filter(element => element !== id));
+    } else {
+      setFavorites([...favorites, id]);
+    }
+  };
+
   const listeTab = [
     {
       status: 'Stats',
@@ -31,7 +62,6 @@ const PokemonUniquePage = ({route, navigation}) => {
     setStatus(status);
   };
   const {item} = route.params;
-
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.viewColumn}>
@@ -52,6 +82,15 @@ const PokemonUniquePage = ({route, navigation}) => {
             source={{uri: item.apiTypes[0].image}}
             style={{width: 20, height: 20, top: 23, margin: 5}}
           />
+          <TouchableOpacity
+            style={styles.favoritesButton}
+            onPress={() => checkFavorite(item.pokedexId)}>
+            <Text>
+              {!favorites.includes(item.pokedexId)
+                ? 'Ajouter aux favoris'
+                : 'Retirer des favoris'}{' '}
+            </Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.viewRow}>
           {listeTab.map(e => (
@@ -169,12 +208,16 @@ const styles = StyleSheet.create({
     margin: 5,
     flexDirection: 'column',
     width: Dimensions.get('window').width,
+    height: 250,
   },
   textDetail: {
     margin: 10,
   },
   viewResistance: {
     padding: 5,
+  },
+  favoritesButton: {
+    top: 30,
   },
 });
 export default PokemonUniquePage;

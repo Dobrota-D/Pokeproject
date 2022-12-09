@@ -35,6 +35,9 @@ export const deleteUser = async id => {
 export const getFavorites = async id => {
   let json = await AsyncStorage.getItem(`favorites_${id}`);
   let favorites = await JSON.parse(json);
+  if (favorites === null) {
+    await saveFavorites(id, []);
+  }
   return favorites;
 };
 
